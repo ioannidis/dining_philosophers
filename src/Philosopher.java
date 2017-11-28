@@ -11,6 +11,15 @@ class Philosopher extends Thread {
     private SimpleDateFormat sdf;
     private Random randomNum;
 
+    private static int totalWaitingTimeForEveryOne = 0;
+    private static int philosophersNum;
+    private static int countDown;
+
+    private static synchronized void increaseTotalWaitingTime(int time) {
+        totalWaitingTimeForEveryOne += time;
+        countDown--;
+    }
+
     public Philosopher(int tName, Fork leftFork, Fork rightFork) {
         this.tName              = tName;
         this.leftFork           = leftFork;
@@ -98,11 +107,20 @@ class Philosopher extends Thread {
     private void done() {
         if (this.remainingTime <= 0) {
             try {
+                this.increaseTotalWaitingTime(this.totalTime);
                 System.out.println("================= SUMMARY =================" );
                 System.out.println("#"+ tName + " Philosopher is DONE !!!" );
                 System.out.println("Total times ate: " + this.eatingTimes );
                 System.out.println("Average time waiting: " + (this.totalTime/this.eatingTimes) +" sec");
                 System.out.println("===========================================" );
+
+
+                if (countDown == 0) {
+                    System.out.println("###========================================###");
+                    System.out.println("The total average waiting time for all the philosophers is: " + this.totalWaitingTimeForEveryOne/philosophersNum + " seconds!");
+                    System.out.println("###========================================###");
+                }
+
                 this.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -110,4 +128,8 @@ class Philosopher extends Thread {
         }
     }
 
+    public void setNumberOfPhilosophers(int philosophersNumber) {
+        this.philosophersNum = philosophersNumber;
+        this.countDown = philosophersNumber;
+    }
 }

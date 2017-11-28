@@ -8,7 +8,7 @@ class Fork {
     SimpleDateFormat sdf;
 
     public Fork() {
-        this.mutex = new Semaphore(1, true);
+        this.mutex = new Semaphore(1);
         sdf = new SimpleDateFormat("hh:mm:ss a");
     }
 
