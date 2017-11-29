@@ -3,9 +3,9 @@ import java.util.Date;
 import java.util.concurrent.Semaphore;
 
 class Fork {
-    private Semaphore mutex ;
-    Date date;
-    SimpleDateFormat sdf;
+    private Semaphore mutex;
+    private Date date;
+    private SimpleDateFormat sdf;
 
     public Fork() {
         this.mutex = new Semaphore(1);
@@ -41,12 +41,12 @@ class Fork {
 //    }
 
     public boolean grabFork(int philosopherName, String fork) {
-        synchronized (this) {
             this.date = new Date();
-            //System.out.println(this.isForkAvailable() + " === " + mutex.availablePermits());
+            //System.out.println(this.isForkAvailable() + " ==" + philosopherName + " == " + mutex.availablePermits());
             if (this.isForkAvailable()) {
                 try {
                     mutex.acquire();
+                    //System.out.println(this.isForkAvailable() + " *** " + philosopherName + " *** " + mutex.availablePermits());
                     System.out.println("#" + philosopherName + " Philosopher GRABS the " + fork + " fork at " + sdf.format(date));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -56,12 +56,9 @@ class Fork {
                 System.out.println("#" + philosopherName + " Philosopher could NOT grab the " + fork + " fork!!!!");
                 return false;
             }
-        }
-
     }
 
     public boolean releaseFork(int philosopherName, String fork) {
-        synchronized (this) {
             if (!this.isForkAvailable()) {
                 this.date = new Date();
                 mutex.release();
@@ -69,8 +66,6 @@ class Fork {
                 return true;
             }
             return false;
-        }
-
     }
 
     public boolean isForkAvailable() {

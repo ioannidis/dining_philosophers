@@ -6,7 +6,7 @@ class Philosopher extends Thread {
     private int tName, remainingTime, totalTime, eatingTimes;
     private final Fork leftFork;
     private final Fork rightFork;
-    private boolean hasLeftFork, hasRightFork;
+    private boolean hasLeftFork, hasRightFork, isDone;
     private Date date;
     private SimpleDateFormat sdf;
     private Random randomNum;
@@ -36,7 +36,7 @@ class Philosopher extends Thread {
     public void run() {
         System.out.println("Running " +  tName );
 
-        while (true) {
+        while (!isDone) {
             // Philosopher is thinking
             this.think();
 
@@ -45,6 +45,8 @@ class Philosopher extends Thread {
 
             // Philosopher is trying to pick the right fork
             this.hasRightFork = this.rightFork.grabFork(tName, "RIGHT");
+
+            this.eat();
 
             // Philosopher is eating
             if (this.hasRightFork && this.hasLeftFork)
@@ -56,7 +58,7 @@ class Philosopher extends Thread {
 
             // Philosopher releases the left fork
             if (this.hasLeftFork)
-                this.hasLeftFork = this.leftFork.releaseFork(tName, "LEFT");
+               this.hasLeftFork = this.leftFork.releaseFork(tName, "LEFT");
 
             // Checking if philosopher is done
             this.done();
@@ -121,11 +123,17 @@ class Philosopher extends Thread {
                     System.out.println("###========================================###");
                 }
 
+                this.isDone = true;
+
                 this.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int getTime() {
+        return totalTime;
     }
 
     public void setNumberOfPhilosophers(int philosophersNumber) {
