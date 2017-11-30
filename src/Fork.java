@@ -7,7 +7,7 @@ class Fork {
     private Date date;
     private SimpleDateFormat sdf;
     private Long ownerId;
-    private Thread ownder;
+    private Thread owner;
 
     public Fork() {
         this.mutex = new Semaphore(1);
@@ -48,17 +48,16 @@ class Fork {
             if (this.isForkAvailable()) {
                 try {
                     mutex.acquire();
-                    this.ownder = philosopher;
+                    this.owner = philosopher;
                     ownerId = philosopher.getId();
                     //System.out.println(this.isForkAvailable() + " *** " + philosopher.getName() + " *** " + mutex.availablePermits());
                     System.out.println("#" + philosopher.getName() + " Philosopher GRABS the " + fork + " fork at " + sdf.format(date));
                 } catch (InterruptedException e) {
-                    System.out.println("#" + philosopher.getName() + " Philosopher could NOT CCCAAATTTCCCHHH the " + fork + " fork!!!!");
                     e.printStackTrace();
                 }
                 return true;
             } else {
-                System.out.println("#" + philosopher.getName() + " Philosopher could NOT grab the " + fork + " fork. " + this.ownder.getName() + " has it!!!");
+                System.out.println("#" + philosopher.getName() + " Philosopher could NOT grab the " + fork + " fork. " + this.owner.getName() + " has it!!!");
                 return false;
             }
     }

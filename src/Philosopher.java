@@ -108,7 +108,6 @@ class Philosopher extends Thread {
 
     private void done() {
         if (this.remainingTime <= 0) {
-            try {
                 this.increaseTotalWaitingTime(this.totalTime);
                 System.out.println("================= SUMMARY =================" );
                 System.out.println("#"+ this.getName() + " Philosopher is DONE !!!" );
@@ -125,10 +124,6 @@ class Philosopher extends Thread {
 
                 this.isDone = true;
 
-                this.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 

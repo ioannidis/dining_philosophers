@@ -9,6 +9,7 @@ public class Main {
     public static void main(String args[]) {
 
         int philosophersNumber;
+        int sumTotalWaitingTime = 0;
         //int averageTotalWaitingTime = 0;
 
         // Reading the number of the philosophers
@@ -58,7 +59,12 @@ public class Main {
         // TODO: KOMPLE
         for (int i = 0; i < philosophersNumber; i++) {
             System.out.println(PhilosopherArray[i].getTime());
+            sumTotalWaitingTime += PhilosopherArray[i].getTime();
         }
+
+        System.out.println("=================FINAL SUMMARY ============" );
+        System.out.println("Total average waiting time for all philosophers: " + (sumTotalWaitingTime/philosophersNumber) +" sec");
+        System.out.println("===========================================" );
 
         /*
 
