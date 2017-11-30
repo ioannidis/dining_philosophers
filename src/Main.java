@@ -31,12 +31,10 @@ public class Main {
 
         for (int i = 0; i < philosophersNumber; i++) {
 
-            // Trick to avoid deadlock
+            PhilosopherArray[i] = new Philosopher(i+1, forksArray[(i+1) % philosophersNumber], forksArray[i]);
+
             if (i == philosophersNumber - 1) {
-                PhilosopherArray[i] = new Philosopher(i+1, forksArray[(i + 1) % philosophersNumber], forksArray[i]);
                 PhilosopherArray[i].setNumberOfPhilosophers(philosophersNumber);
-            } else {
-                PhilosopherArray[i] = new Philosopher(i+1, forksArray[i], forksArray[(i + 1) % philosophersNumber]);
             }
 
         }

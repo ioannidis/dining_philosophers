@@ -6,6 +6,8 @@ class Fork {
     private Semaphore mutex;
     private Date date;
     private SimpleDateFormat sdf;
+    private Long ownerId;
+    private Thread ownder;
 
     public Fork() {
         this.mutex = new Semaphore(1);
@@ -40,35 +42,38 @@ class Fork {
 //        return mutex.availablePermits() > 0;
 //    }
 
-    public boolean grabFork(int philosopherName, String fork) {
+    public boolean grabFork(Thread philosopher, int philosopherName, String fork) {
             this.date = new Date();
-            //System.out.println(this.isForkAvailable() + " ==" + philosopherName + " == " + mutex.availablePermits());
+            //System.out.println(this.isForkAvailable() + " ==" + philosopher.getName() + " == " + mutex.availablePermits());
             if (this.isForkAvailable()) {
                 try {
                     mutex.acquire();
-                    //System.out.println(this.isForkAvailable() + " *** " + philosopherName + " *** " + mutex.availablePermits());
-                    System.out.println("#" + philosopherName + " Philosopher GRABS the " + fork + " fork at " + sdf.format(date));
+                    this.ownder = philosopher;
+                    ownerId = philosopher.getId();
+                    //System.out.println(this.isForkAvailable() + " *** " + philosopher.getName() + " *** " + mutex.availablePermits());
+                    System.out.println("#" + philosopher.getName() + " Philosopher GRABS the " + fork + " fork at " + sdf.format(date));
                 } catch (InterruptedException e) {
+                    System.out.println("#" + philosopher.getName() + " Philosopher could NOT CCCAAATTTCCCHHH the " + fork + " fork!!!!");
                     e.printStackTrace();
                 }
                 return true;
             } else {
-                System.out.println("#" + philosopherName + " Philosopher could NOT grab the " + fork + " fork!!!!");
+                System.out.println("#" + philosopher.getName() + " Philosopher could NOT grab the " + fork + " fork. " + this.ownder.getName() + " has it!!!");
                 return false;
             }
     }
 
-    public boolean releaseFork(int philosopherName, String fork) {
-            if (!this.isForkAvailable()) {
+    public boolean releaseFork(Thread philosopher, int philosopherName, String fork) {
+            if (!this.isForkAvailable() && this.ownerId == philosopher.getId()) {
                 this.date = new Date();
                 mutex.release();
-                System.out.println("#" + philosopherName + " Philosopher RELEASE the " + fork + " fork at " + sdf.format(date));
+                System.out.println("#" + philosopher.getName() + " Philosopher RELEASE the " + fork + " fork at " + sdf.format(date));
                 return true;
             }
             return false;
     }
 
-    public boolean isForkAvailable() {
+    private boolean isForkAvailable() {
         return mutex.availablePermits() > 0;
     }
 

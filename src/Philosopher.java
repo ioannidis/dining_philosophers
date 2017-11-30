@@ -41,24 +41,24 @@ class Philosopher extends Thread {
             this.think();
 
             // Philosopher is trying to pick the left fork
-            this.hasLeftFork = this.leftFork.grabFork(tName, "LEFT");
+            this.hasLeftFork = this.leftFork.grabFork(this,tName, "LEFT");
 
             // Philosopher is trying to pick the right fork
-            this.hasRightFork = this.rightFork.grabFork(tName, "RIGHT");
+            this.hasRightFork = this.rightFork.grabFork(this, tName, "RIGHT");
 
-            this.eat();
+            //this.eat();
 
             // Philosopher is eating
             if (this.hasRightFork && this.hasLeftFork)
                 this.eat();
 
             // Philosopher releases the right fork
-            if (this.hasRightFork)
-                this.hasRightFork = this.rightFork.releaseFork(tName, "RIGHT");
+            //if (this.hasRightFork)
+                this.hasRightFork = this.rightFork.releaseFork(this, tName, "RIGHT");
 
             // Philosopher releases the left fork
-            if (this.hasLeftFork)
-               this.hasLeftFork = this.leftFork.releaseFork(tName, "LEFT");
+            //if (this.hasLeftFork)
+               this.hasLeftFork = this.leftFork.releaseFork(this, tName, "LEFT");
 
             // Checking if philosopher is done
             this.done();
@@ -73,7 +73,7 @@ class Philosopher extends Thread {
             this.remainingTime  -= tName;
             this.eatingTimes++;
 
-            System.out.println("#"+ tName + " Philosopher is EATING at time " + sdf.format(date) + " for " + tName + " seconds");
+            System.out.println("#"+ this.getName() + " Philosopher is EATING at time " + sdf.format(date) + " for " + tName + " seconds");
 
             Thread.sleep(eatingTime);
         }
@@ -85,7 +85,7 @@ class Philosopher extends Thread {
     private void think() {
         this.date = new Date();
 
-        System.out.println("#"+ this.tName + " Philosopher is THINKING at time " + sdf.format(date) );
+        System.out.println("#"+ this.getName() + " Philosopher is THINKING at time " + sdf.format(date) );
 
         try {
             // Block thread for a random time
@@ -103,7 +103,7 @@ class Philosopher extends Thread {
     private void hungry() {
         this.date = new Date();
 
-        System.out.println("#"+ this.tName + " Philosopher is HUNGRY at time " + sdf.format(date) );
+        System.out.println("#"+ this.getName() + " Philosopher is HUNGRY at time " + sdf.format(date) );
     }
 
     private void done() {
@@ -111,7 +111,7 @@ class Philosopher extends Thread {
             try {
                 this.increaseTotalWaitingTime(this.totalTime);
                 System.out.println("================= SUMMARY =================" );
-                System.out.println("#"+ tName + " Philosopher is DONE !!!" );
+                System.out.println("#"+ this.getName() + " Philosopher is DONE !!!" );
                 System.out.println("Total times ate: " + this.eatingTimes );
                 System.out.println("Average time waiting: " + (this.totalTime/this.eatingTimes) +" sec");
                 System.out.println("===========================================" );
