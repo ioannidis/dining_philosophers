@@ -3,14 +3,14 @@ import java.util.Date;
 import java.util.concurrent.Semaphore;
 
 class Fork {
-    private Semaphore mutex;
+    private Semaphore sem;
     private Date date;
     private SimpleDateFormat sdf;
     private Long ownerId;
     private Thread owner;
 
     public Fork() {
-        this.mutex = new Semaphore(1);
+        this.sem = new Semaphore(1);
         sdf = new SimpleDateFormat("hh:mm:ss a");
     }
 
@@ -18,7 +18,7 @@ class Fork {
             this.date = new Date();
             if (this.isForkAvailable()) {
                 try {
-                    mutex.acquire();
+                    sem.acquire();
                     this.owner = philosopher;
                     ownerId = philosopher.getId();
                     System.out.println("#" + philosopher.getName() + " GRABS the " + fork + " fork at " + sdf.format(date));
@@ -35,7 +35,7 @@ class Fork {
     public boolean releaseFork(Thread philosopher, String fork) {
             if (!this.isForkAvailable() && this.ownerId == philosopher.getId()) {
                 this.date = new Date();
-                mutex.release();
+                sem.release();
                 System.out.println("#" + philosopher.getName() + " RELEASE the " + fork + " fork at " + sdf.format(date));
                 return true;
             }
@@ -43,7 +43,7 @@ class Fork {
     }
 
     private boolean isForkAvailable() {
-        return mutex.availablePermits() > 0;
+        return sem.availablePermits() > 0;
     }
 
 }
