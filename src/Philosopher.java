@@ -41,10 +41,10 @@ class Philosopher extends Thread {
             this.think();
 
             // Philosopher is trying to pick the left fork
-            this.hasLeftFork = this.leftFork.grabFork(this,tName, "LEFT");
+            this.hasLeftFork = this.leftFork.grabFork(this, "LEFT");
 
             // Philosopher is trying to pick the right fork
-            this.hasRightFork = this.rightFork.grabFork(this, tName, "RIGHT");
+            this.hasRightFork = this.rightFork.grabFork(this, "RIGHT");
 
             //this.eat();
 
@@ -54,11 +54,11 @@ class Philosopher extends Thread {
 
             // Philosopher releases the right fork
             //if (this.hasRightFork)
-                this.hasRightFork = this.rightFork.releaseFork(this, tName, "RIGHT");
+                this.hasRightFork = this.rightFork.releaseFork(this,"RIGHT");
 
             // Philosopher releases the left fork
             //if (this.hasLeftFork)
-               this.hasLeftFork = this.leftFork.releaseFork(this, tName, "LEFT");
+               this.hasLeftFork = this.leftFork.releaseFork(this, "LEFT");
 
             // Checking if philosopher is done
             this.done();
