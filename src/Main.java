@@ -56,7 +56,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        // TODO: KOMPLE
         for (int i = 0; i < philosophersNumber; i++) {
             System.out.println(PhilosopherArray[i].getTime());
             sumTotalWaitingTime += PhilosopherArray[i].getTime();
@@ -66,27 +65,6 @@ public class Main {
         System.out.println("Total average waiting time for all philosophers: " + (sumTotalWaitingTime/philosophersNumber) +" sec");
         System.out.println("===========================================" );
 
-        /*
-
-
-
-        // Adding philosophers and forks in the arrays
-        for (int i = 0; i < philosophersNumber; i++) {
-
-            // Trick to avoid deadlock
-            if (i == PhilosopherArray.length - 1) {
-                PhilosopherArray[i] = new Philosopher(i+1, forksArray[(i + 1) % philosophersNumber], forksArray[i]);
-                PhilosopherArray[i].setNumberOfPhilosophers(philosophersNumber);
-            } else {
-                PhilosopherArray[i] = new Philosopher(i+1, forksArray[i], forksArray[(i + 1) % philosophersNumber]);
-            }
-
-        }
-
-        // Start the threads
-        for (int i = 0; i < philosophersNumber; i++) {
-            PhilosopherArray[i].start();
-        }*/
 
     }
 }
