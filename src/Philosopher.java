@@ -11,12 +11,12 @@ class Philosopher extends Thread {
     private SimpleDateFormat sdf;
     private Random randomNum;
 
-    private static int totalWaitingTimeForEveryOne = 0;
-    private static int philosophersNum;
+//    private static int totalWaitingTimeForEveryOne = 0;
+//    private static int philosophersNum;
 
-    private static synchronized void increaseTotalWaitingTime(int time) {
-        totalWaitingTimeForEveryOne += time;
-    }
+//    private static synchronized void increaseTotalWaitingTime(int time) {
+//        totalWaitingTimeForEveryOne += time;
+//    }
 
     public Philosopher(int tName, Fork leftFork, Fork rightFork) {
         this.tName              = tName;
@@ -68,7 +68,7 @@ class Philosopher extends Thread {
             this.remainingTime  -= tName;
             this.eatingTimes++;
 
-            System.out.println("#"+ this.getName() + " Philosopher is EATING at time " + sdf.format(date) + " for " + tName + " seconds");
+            System.out.println("#"+ this.getName() + " is EATING at time " + sdf.format(date) + " for " + tName + " seconds");
 
             Thread.sleep(eatingTime);
         }
@@ -80,7 +80,7 @@ class Philosopher extends Thread {
     private void think() {
         this.date = new Date();
 
-        System.out.println("#"+ this.getName() + " Philosopher is THINKING at time " + sdf.format(date) );
+        System.out.println("#"+ this.getName() + " is THINKING at time " + sdf.format(date) );
 
         try {
             // Block thread for a random time
@@ -98,14 +98,14 @@ class Philosopher extends Thread {
     private void hungry() {
         this.date = new Date();
 
-        System.out.println("#"+ this.getName() + " Philosopher is HUNGRY at time " + sdf.format(date) );
+        System.out.println("#"+ this.getName() + " is HUNGRY at time " + sdf.format(date) );
     }
 
     private void done() {
         if (this.remainingTime <= 0) {
-                this.increaseTotalWaitingTime(this.totalTime);
+//                this.increaseTotalWaitingTime(this.totalTime);
                 System.out.println("================= SUMMARY =================" );
-                System.out.println("#"+ this.getName() + " Philosopher is DONE !!!" );
+                System.out.println("#"+ this.getName() + " is DONE !!!" );
                 System.out.println("Total times ate: " + this.eatingTimes );
                 System.out.println("Average time waiting: " + (this.totalTime/this.eatingTimes) +" sec");
                 System.out.println("===========================================" );
@@ -119,7 +119,7 @@ class Philosopher extends Thread {
         return totalTime;
     }
 
-    public void setNumberOfPhilosophers(int philosophersNumber) {
-        this.philosophersNum = philosophersNumber;
-    }
+//    public void setNumberOfPhilosophers(int philosophersNumber) {
+//        this.philosophersNum = philosophersNumber;
+//    }
 }

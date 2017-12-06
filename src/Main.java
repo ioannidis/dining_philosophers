@@ -10,7 +10,6 @@ public class Main {
 
         int philosophersNumber;
         int sumTotalWaitingTime = 0;
-        //int averageTotalWaitingTime = 0;
 
         // Reading the number of the philosophers
         // It should be >=3 and <= 10
@@ -33,10 +32,11 @@ public class Main {
         for (int i = 0; i < philosophersNumber; i++) {
 
             PhilosopherArray[i] = new Philosopher(i+1, forksArray[(i+1) % philosophersNumber], forksArray[i]);
+            PhilosopherArray[i].setName(i+1 + " Philosopher");
 
-            if (i == philosophersNumber - 1) {
-                PhilosopherArray[i].setNumberOfPhilosophers(philosophersNumber);
-            }
+//            if (i == philosophersNumber - 1) {
+//                PhilosopherArray[i].setNumberOfPhilosophers(philosophersNumber);
+//            }
 
         }
 

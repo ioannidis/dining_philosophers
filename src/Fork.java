@@ -21,13 +21,13 @@ class Fork {
                     mutex.acquire();
                     this.owner = philosopher;
                     ownerId = philosopher.getId();
-                    System.out.println("#" + philosopher.getName() + " Philosopher GRABS the " + fork + " fork at " + sdf.format(date));
+                    System.out.println("#" + philosopher.getName() + " GRABS the " + fork + " fork at " + sdf.format(date));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 return true;
             } else {
-                System.out.println("#" + philosopher.getName() + " Philosopher could NOT grab the " + fork + " fork. " + this.owner.getName() + " has it!!!");
+                System.out.println("#" + philosopher.getName() + " could NOT grab the " + fork + " fork. " + this.owner.getName() + " has it!!!");
                 return false;
             }
     }
@@ -36,7 +36,7 @@ class Fork {
             if (!this.isForkAvailable() && this.ownerId == philosopher.getId()) {
                 this.date = new Date();
                 mutex.release();
-                System.out.println("#" + philosopher.getName() + " Philosopher RELEASE the " + fork + " fork at " + sdf.format(date));
+                System.out.println("#" + philosopher.getName() + " RELEASE the " + fork + " fork at " + sdf.format(date));
                 return true;
             }
             return false;
