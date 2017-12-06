@@ -13,11 +13,9 @@ class Philosopher extends Thread {
 
     private static int totalWaitingTimeForEveryOne = 0;
     private static int philosophersNum;
-    private static int countDown;
 
     private static synchronized void increaseTotalWaitingTime(int time) {
         totalWaitingTimeForEveryOne += time;
-        countDown--;
     }
 
     public Philosopher(int tName, Fork leftFork, Fork rightFork) {
@@ -112,13 +110,6 @@ class Philosopher extends Thread {
                 System.out.println("Average time waiting: " + (this.totalTime/this.eatingTimes) +" sec");
                 System.out.println("===========================================" );
 
-
-                if (countDown == 0) {
-                    System.out.println("###========================================###");
-                    System.out.println("The total average waiting time for all the philosophers is: " + this.totalWaitingTimeForEveryOne/philosophersNum + " seconds!");
-                    System.out.println("###========================================###");
-                }
-
                 this.isDone = true;
 
         }
@@ -130,6 +121,5 @@ class Philosopher extends Thread {
 
     public void setNumberOfPhilosophers(int philosophersNumber) {
         this.philosophersNum = philosophersNumber;
-        this.countDown = philosophersNumber;
     }
 }
