@@ -62,13 +62,13 @@ class Philosopher extends Thread {
 
     private void eat() {
         try {
-            int eatingTime      = tName * 1000;
+            int eatingTime      = this.tName * 1000;
 
             this.date           = new Date();
-            this.remainingTime  -= tName;
+            this.remainingTime  -= this.tName;
             this.eatingTimes++;
 
-            System.out.println("#"+ this.getName() + " is EATING at time " + sdf.format(date) + " for " + tName + " seconds");
+            System.out.println("#"+ this.getName() + " is EATING at time " + this.sdf.format(date) + " for " + this.tName + " seconds");
 
             Thread.sleep(eatingTime);
         }
@@ -80,7 +80,7 @@ class Philosopher extends Thread {
     private void think() {
         this.date = new Date();
 
-        System.out.println("#"+ this.getName() + " is THINKING at time " + sdf.format(date) );
+        System.out.println("#"+ this.getName() + " is THINKING at time " + this.sdf.format(date) );
 
         try {
             // Block thread for a random time
@@ -98,7 +98,7 @@ class Philosopher extends Thread {
     private void hungry() {
         this.date = new Date();
 
-        System.out.println("#"+ this.getName() + " is HUNGRY at time " + sdf.format(date) );
+        System.out.println("#"+ this.getName() + " is HUNGRY at time " + this.sdf.format(date) );
     }
 
     private void done() {
@@ -116,7 +116,7 @@ class Philosopher extends Thread {
     }
 
     public int getTime() {
-        return totalTime;
+        return this.totalTime;
     }
 
 //    public void setNumberOfPhilosophers(int philosophersNumber) {
