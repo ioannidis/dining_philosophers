@@ -3,20 +3,13 @@ import java.util.Date;
 import java.util.Random;
 
 class Philosopher extends Thread {
-    private int tName, remainingTime, totalTime, eatingTimes;
+    private int tName, remainingTime, totalTime, eatingTimes, averageTotalTime;
     private final Fork leftFork;
     private final Fork rightFork;
     private boolean hasLeftFork, hasRightFork, isDone;
     private Date date;
     private SimpleDateFormat sdf;
     private Random randomNum;
-
-//    private static int totalWaitingTimeForEveryOne = 0;
-//    private static int philosophersNum;
-
-//    private static synchronized void increaseTotalWaitingTime(int time) {
-//        totalWaitingTimeForEveryOne += time;
-//    }
 
     public Philosopher(int tName, Fork leftFork, Fork rightFork) {
         this.tName              = tName;
@@ -60,6 +53,7 @@ class Philosopher extends Thread {
         }
     }
 
+    // Eating condition
     private void eat() {
         try {
             int eatingTime      = this.tName * 1000;
@@ -77,6 +71,7 @@ class Philosopher extends Thread {
         }
     }
 
+    // Thinking condition
     private void think() {
         this.date = new Date();
 
@@ -95,6 +90,15 @@ class Philosopher extends Thread {
         this.hungry();
     }
 
+    private void endThink() {
+        try {
+            this.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Hungry condition
     private void hungry() {
         this.date = new Date();
 
@@ -103,23 +107,23 @@ class Philosopher extends Thread {
 
     private void done() {
         if (this.remainingTime <= 0) {
-//                this.increaseTotalWaitingTime(this.totalTime);
-                System.out.println("================= SUMMARY =================" );
-                System.out.println("#"+ this.getName() + " is DONE !!!" );
-                System.out.println("Total times ate: " + this.eatingTimes );
-                System.out.println("Average time waiting: " + (this.totalTime/this.eatingTimes) +" sec");
-                System.out.println("===========================================" );
+            this.averageTotalTime = this.totalTime/this.eatingTimes;
 
-                this.isDone = true;
+            System.out.println("================= SUMMARY =================" );
+            System.out.println("#"+ this.getName() + " is DONE and now is THINKING!!!" );
+            System.out.println("Total times ate: " + this.eatingTimes );
+            System.out.println("Average time waiting: " + this.averageTotalTime +" sec");
+            System.out.println("===========================================" );
+
+            this.isDone = true;
+            this.endThink();
 
         }
     }
 
-    public int getTime() {
-        return this.totalTime;
+    // Returns the total average time for this philosopher
+    public int getAverageTime() {
+        return this.averageTotalTime;
     }
 
-//    public void setNumberOfPhilosophers(int philosophersNumber) {
-//        this.philosophersNum = philosophersNumber;
-//    }
 }

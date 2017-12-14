@@ -25,7 +25,7 @@ class Fork {
                 }
                 return true;
             } else {
-                System.out.println("#" + philosopher.getName() + " could NOT grab the " + fork + " fork. " + this.owner.getName() + " has it!!!");
+                System.out.println("#" + philosopher.getName() + " could NOT grab the " + fork + " fork. #" + this.owner.getName() + " has it!!!");
                 return false;
             }
     }

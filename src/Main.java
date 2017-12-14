@@ -34,10 +34,6 @@ public class Main {
             PhilosopherArray[i] = new Philosopher(i+1, forksArray[(i+1) % philosophersNumber], forksArray[i]);
             PhilosopherArray[i].setName(i+1 + " Philosopher");
 
-//            if (i == philosophersNumber - 1) {
-//                PhilosopherArray[i].setNumberOfPhilosophers(philosophersNumber);
-//            }
-
         }
 
         ExecutorService executor = Executors.newFixedThreadPool(philosophersNumber);
@@ -48,8 +44,6 @@ public class Main {
 
         executor.shutdown();
 
-        System.out.println(executor.toString());
-
         try {
             executor.awaitTermination(1, TimeUnit.DAYS);
         } catch (InterruptedException e) {
@@ -57,7 +51,7 @@ public class Main {
         }
 
         for (int i = 0; i < philosophersNumber; i++) {
-            sumTotalWaitingTime += PhilosopherArray[i].getTime();
+            sumTotalWaitingTime += PhilosopherArray[i].getAverageTime();
         }
 
         System.out.println("=================FINAL SUMMARY ============" );
