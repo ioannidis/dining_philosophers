@@ -1,6 +1,6 @@
-#The dining philosophers problem in Java
+# The dining philosophers problem in Java
 
-This Java solves the philosophers' dinner problem as follows:
+This Java application solves the philosophers' dinner problem as follows:
 1. Every philosopher will be implemented as a process or a thread.
 2. It will initially show the user the ability to define the number of philosophers (from N = 3 to 10). Then the corresponding number of philosophers (threads or processes) will be created.
 3. Each philosopher will remain for a random number of seconds in THINKING mode (ie blocked).
