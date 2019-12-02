@@ -12,38 +12,10 @@ class Fork {
         sdf = new SimpleDateFormat("hh:mm:ss a");
     }
 
-    //    public void grab(int philsopherName, String fork) {
-//        Instant instant = Instant.now();
-//        try {
-//            if (this.isFree()) {
-//                mutex.acquire();
-//                System.out.println("Philosopher " + philsopherName + " grabs the " + fork + " fork at " + instant);
-//            }
-//            else {
-//                System.out.println("Philosopher " + philsopherName + " could NOT grab the " + fork + " fork!!!!");
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace(System.out);
-//        }
-//    }
-//
-//    public void release(int philsopherName, String fork) {
-//        if (!this.isFree()) {
-//            Instant instant = Instant.now();
-//            mutex.release();
-//            System.out.println("Philosopher " + philsopherName + " RELEASE the " + fork + " fork at " + instant);
-//        }
-//    }
-//
-//    public boolean isFree() {
-//        return mutex.availablePermits() > 0;
-//    }
-
     public boolean grabFork(int philosopherName, String fork) {
         synchronized (this) {
             this.date = new Date();
-            //System.out.println(this.isForkAvailable() + " === " + mutex.availablePermits());
+
             if (this.isForkAvailable()) {
                 try {
                     mutex.acquire();

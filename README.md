@@ -1,25 +1,30 @@
-# dining_philosophers
-Dinig philosophers problem in Java
+#The dining philosophers problem in Java
 
-1η Προαιρετική Εργασία: Δια-διεργασιακή επικοινωνία με το δείπνο των φιλοσόφων
-Περιγραφή:	
-Γράψτε ένα πρόγραμμα σε C ή σε Java το οποίο θα υλοποιεί το πρόβλημα του δείπνου των φιλοσόφων ως εξής:
-1)      Κάθε φιλόσοφος θα υλοποιείται ως μία διεργασία ή ένα νήμα. ========= ok
-2)      Θα εμφανίζει αρχικά στο χρήστη τη δυνατότητα να ορίσει το πλήθος των φιλοσόφων (από Ν = 3 μέχρι 10). Στη συνέχεια θα δημιουργείται το αντίστοιχο πλήθος φιλοσόφων (νημάτων ή διεργασιών). ======== ok
-3)      Κάθε φιλόσοφος θα παραμένει για ένα τυχαίο αριθμό δευτερολέπτων στην κατάσταση THINKING (δηλαδή blocked).
-4)      Ο κάθε φιλόσοφος θα έχει μία προτεραιότητα στην εκτέλεσή του ως εξής:
-Έστω ότι το κβάντο χρόνου είναι Q=1sec. Στον n-οστό φιλόσοφο θα δίδεται χρόνος εκτέλεσης ίσος με T(n) = n*Q (π.χ. στον φιλόσοφο 1, δίδεται χρόνος 1*Q, στον φιλόσοφο 8 δίδεται χρόνος 8*Q).
-5)      Η διάρκεια της κατάστασης HUNGRY (ready) εξαρτάται από την πορεία εκτέλεσης του προγράμματος και δεν θα προσδιοριστεί από τον προγραμματιστή.
-6)      Κάθε φιλόσοφος θα εμφανίζει μηνύματα στην οθόνη, ώστε να δηλώνει την κατάσταση που βρίσκεται τη συγκεκριμένη ώρα του συστήματος. Όταν ο φιλόσοφος αλλάζει κατάσταση, τότε θα εμφανίζει και πάλι το αντίστοιχο μήνυμα (ένα μήνυμα για κάθε αλλαγή κατάστασης). π.χ.
-Philosopher 1 is THINKING at time 14:50:10
-Philosopher 2 is HUNGRY at time 14:50:12
-Philosopher 2 is EATING at time 14:50:13
-7)      Όταν ένας φιλόσοφος προσπαθεί να πάρει και τα δύο πιρούνια, μπορεί να πετύχει ή να αποτύχει. Να εμφανίζονται μηνύματα τα οποία να δείχνουν την επιτυχία ή αποτυχία να πάρει τα δύο πιρούνια, τη χρονική στιγμή κάθε τέτοιου γεγονότος, καθώς και τις τιμές των σημαφόρων που χρησιμοποιεί. Σε περίπτωση αποτυχίας να εμφανίζεται μήνυμα το οποίο να δηλώνει το λόγο της αποτυχίας (π.χ. Philosopher 2 failed to take fork 1, because Philosopher 1 was eating).
-8)      Να υπολογίσετε για κάθε φιλόσοφο το μέσο χρόνο αναμονής του για φαγητό (δηλαδή πόσο κατά μέσο όρο χρονικό διάστημα χρειάστηκε να περιμένει για να επιτύχει να πάρει τα δύο πιρούνια για να μεταβεί σε κατάσταση EATING. Τέλος να υπολογίστε το συνολικό μέσο χρόνο αναμονής για όλους τους φιλοσόφους.
-9)      Κάθε φιλόσοφος θα πρέπει να βρεθεί στην κατάσταση EATING συνολικά για 20 sec. Μόλις ολοκληρώσει αυτό το χρόνο, θα δηλώνει ότι τερμάτισε το δείπνο του, και θα παραμένει σε κατάσταση THINKING μέχρι να τερματίσουν όλοι οι φιλόσοφοι το δείπνο τους.
-10)  Το πρόγραμμα τερματίζει όταν όλοι οι φιλόσοφοι έχουν ολοκληρώσει το δείπνο τους (ο κάθε φιλόσοφος έφαγε για 20 sec).
- 
-Οδηγίες:
-Η εργασία είναι προαιρετική και ατομική. Σε περίπτωση που την υλοποιήσετε θα λάβετε bonus βαθμολογία επί του τελικού βαθμού σας.
-To παραδοτέο θα περιλαμβάνει: (α) το έγγραφο το οποίο θα περιλαμβάνει αναλυτική περιγραφή του κώδικα και ενδεικτικά screenshots από την εκτέλεση του προγράμματος. (β) τον πηγαίο κώδικα και (γ) το εκτελέσιμο αρχείο. Η παράδοση θα γίνει αποκλειστικά μέσω του eclass σε ένα .zip ή .rar αρχείο.
-Για  τη συγγραφή της άσκησης θα χρησιμοποιήσετε το template που θα βρείτε στα έγγραφα του μαθήματος.
+This Java solves the philosophers' dinner problem as follows:
+1. Every philosopher will be implemented as a process or a thread.
+2. It will initially show the user the ability to define the number of philosophers (from N = 3 to 10). Then the corresponding number of philosophers (threads or processes) will be created.
+3. Each philosopher will remain for a random number of seconds in THINKING mode (ie blocked).
+4. Each philosopher will have one priority in his execution as follows:
+Suppose the time quantum is Q = 1sec. The n-th philosopher will be given execution time equal to T (n) = nQ 
+(eg philosopher 1, time 1Q is given, philosopher 8 is given time 8 * Q). 
+5. The duration of the HUNGRY (ready) state depends on the execution path of the program and will not be determined by the programmer. 
+6. Each philosopher will display messages on the screen to indicate the status of the system at that time. When the philosopher changes 
+state, he will again display the corresponding message (one message for each state change).
+7. When a philosopher tries to get both forks, he can succeed or fail. Display messages indicating the success or failure 
+of getting the two forks. In case of failure a message will be displayed. (eg Philosopher 2 failed to take fork 1, because Philosopher 1 was eating). 
+8. For each philosopher Calculate his average waiting time (how long it took the philosopher to get the two forks and go into EATING mode). 
+9. Every philosopher should be in EATING mode for a total of 20 seconds. Once the 20 sec have passed, he will declare that he 
+has finished his dinner, and will remain in THINKING mode until all philosophers finish their dinner. 
+10. The program ends when all philosophers have finished their dinner (each philosopher ate for 20 sec).
+
+![Initialize program with 3 philosophers](./screenshots/init_program.png)  
+Initialize program with 3 philosophers.
+
+![Philosopher 3 is done](./screenshots/philosopher_3_done.png)  
+Philosopher 3 is done.
+
+![Philosopher 2 is done](./screenshots/philosopher_2_done.jpg)  
+Philosopher 2 is done.
+
+![Philosopher 1 is done.](./screenshots/philosopher_1_done.png)  
+Philosopher 1 is done. Average waiting time displayed.
